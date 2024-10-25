@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class TareaAdapter(private val tareas: MutableList<String>) : RecyclerView.Adapter<TareaAdapter.ViewHolder>() {
+class TareaAdapter(val tareas: LinkedHashSet<String>) : RecyclerView.Adapter<TareaAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.texto)
         val hecho: ImageView = view.findViewById(R.id.hecho)
@@ -19,17 +19,18 @@ class TareaAdapter(private val tareas: MutableList<String>) : RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = tareas[position]
+        holder.textView.text = tareas.elementAt(tareas.size - position - 1)
         holder.hecho.setOnClickListener {
-            tareas.removeAt(holder.adapterPosition)
+            tareas.remove(holder.textView.text)
             notifyItemRemoved(holder.adapterPosition)
         }
     }
 
     override fun getItemCount() = tareas.size
 
-    fun add(txt: String) {
-        tareas.add(0, txt)
-        notifyItemInserted(0)
+    fun add(txt: String): Boolean {
+        val added = tareas.add(txt)
+        if (added) notifyItemInserted(0)
+        return added
     }
 }
