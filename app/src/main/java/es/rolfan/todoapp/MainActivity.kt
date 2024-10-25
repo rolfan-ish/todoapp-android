@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         // Inicializar
         prefs = Preferencias(this)
+        tarea = findViewById(R.id.tarea)
         val adapter = TareaAdapter(prefs.read())
         listaTareas = findViewById(R.id.listaTareas)
         listaTareas.layoutManager = LinearLayoutManager(this)
@@ -38,9 +39,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        with (listaTareas.adapter as TareaAdapter) {
-            prefs.write(tareas)
-        }
+        val adapter = listaTareas.adapter as TareaAdapter
+        prefs.write(adapter.tareas)
     }
 
     fun agregarTarea(view: View) {
