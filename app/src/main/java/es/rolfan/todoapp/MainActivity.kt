@@ -24,10 +24,12 @@ class MainActivity : AppCompatActivity() {
         listaTareas.layoutManager = LinearLayoutManager(this)
         listaTareas.adapter = adapter
 
+        // Boton agregar
         findViewById<Button>(R.id.agregar).setOnClickListener {
             if (!adapter.add(tarea.text.toString()))
                 Toast.makeText(this, "El elemento ya existe", Toast.LENGTH_SHORT)
                     .show()
+            tarea.text.clear()
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
