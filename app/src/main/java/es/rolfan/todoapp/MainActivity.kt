@@ -11,7 +11,14 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
+/**
+ * Aplicación de todolist
+ */
 class MainActivity : AppCompatActivity() {
+    /**
+     * Función ejecutada al iniciarse la aplicación
+     * @param savedInstanceState
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -39,6 +46,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Funcion ejecutada cuando se sale de la aplicación
+     */
     override fun onPause() {
         super.onPause()
         val listaTareas: RecyclerView = findViewById(R.id.listaTareas)
